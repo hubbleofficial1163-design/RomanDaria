@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <title>Приглашение на свадьбу | Роман и Дарья</title>
+    <meta name="description" content="Приглашение на свадьбу Алексея и Анны 19 июля 2026 года">
+    
+    <!-- Предзагрузка критичных ресурсов -->
+    <link rel="preload" href="1.jpg" as="image" importance="high">
+    
+    <!-- Предподключение к внешним ресурсам -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- iOS мета-теги -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Свадьба">
+    
+    <!-- Android мета-теги -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Open Graph для соцсетей -->
+    <meta property="og:title" content="Приглашение на свадьбу | Алексей и Анна">
+    <meta property="og:description" content="Приглашение на свадьбу Алексея и Анны 19 июля 2026 года">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="1.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+    
+    <style>
+        /* Инлайн стили для критичного CSS */
+        .hero-section, .story-section, .location-section, .footer {
+            position: relative;
+        }
+        
+        /* Предотвращение FOIT (Flash of Invisible Text) */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body.fonts-loaded {
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .names, .footer-names, .section-title, .invitation-text h2, .story-text h2, .location-text h2 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        
+        body.fonts-loaded .names,
+        body.fonts-loaded .footer-names,
+        body.fonts-loaded .section-title,
+        body.fonts-loaded .invitation-text h2,
+        body.fonts-loaded .story-text h2,
+        body.fonts-loaded .location-text h2 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
+        }
+        
+        /* CSS переменная для 100vh на iOS */
+        :root {
+            --vh: 1vh;
+        }
+        
+        .hero-image, .story-image, .location-image, .footer-image {
+            height: calc(var(--vh, 1vh) * 100);
+        }
+    </style>
+</head>
+<body>
+    <!-- Остальной контент БЕЗ ИЗМЕНЕНИЙ -->
+    <div class="container">
+        <!-- Первое фото с именами и датой -->
+        <section class="hero-section">
+            <div class="hero-image">
+                <img src="1.jpg" alt="Роман и Дарья">
+                <div class="hero-text">
+                    <h1 class="names">Роман <span class="ampersand">&</span> Дарья</h1>
+                    <div class="date">09 Июля 2026</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Текст приглашения ПОД фото -->
+        <section class="invitation-text-section">
+            <div class="invitation-text">
+                <h2>Дорогие друзья и близкие!</h2>
+                <p>С радостью приглашаем вас разделить с нами самый важный день в нашей жизни — день нашей свадьбы.</p>
+                <p>Мы будем счастливы видеть вас на церемонии бракосочетания и праздничном ужине.</p>
+                <p class="signature">С любовью, Роман и Дарья</p>
+            </div>
+        </section>
+
+        <!-- Секция "Запомните дату" -->
+        <!-- Секция "Запомните дату" -->
+        <section class="save-date-section">
+            <h2 class="section-title">Запомните дату</h2>
+            
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h3>Июль 2026</h3>
+                </div>
+                
+                <div class="calendar-weekdays">
+                    <span>Пн</span>
+                    <span>Вт</span>
+                    <span>Ср</span>
+                    <span>Чт</span>
+                    <span>Пт</span>
+                    <span>Сб</span>
+                    <span>Вс</span>
+                </div>
+                
+                <div class="calendar-days" id="calendar-days">
+                    <!-- Дни будут заполнены через JavaScript -->
+                </div>
+            </div>
+            
+            <div class="save-date-note">
+                <i class="fas fa-circle"></i>
+                <span>9 июля 2026</span>
+                <i class="fas fa-circle"></i>
+            </div>
+        </section>
+
+        <!-- Второе фото с мини-историей -->
+        <section class="story-section">
+            <div class="story-image">
+                <img src="2.jpg" alt="Наша история">
+                <div class="story-text">
+                    <h2>Наша история</h2>
+                    <p>Когда-то мы сидели за одной партой, а теперь идём по жизни рядом. Школьная история превратилась в настоящую любовь.</p>
+                    <div class="quote">И мы с радостью приглашаем вас стать частью нашего самого важного дня.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Детали мероприятия -->
+        <section class="details-section">
+            <h2 class="section-title">Детали мероприятия</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">15:00</div>
+                    <div class="timeline-content">
+                        <h3>Сбор гостей</h3>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">16:00</div>
+                    <div class="timeline-content">
+                        <h3>Выездная церемония</h3>
+                        <p>Торжественная регистрация брака</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">17:00</div>
+                    <div class="timeline-content">
+                        <h3>Банкет</h3>
+                        <p>Праздничный ужин</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">22:00</div>
+                    <div class="timeline-content">
+                        <h3>Завершение банкета</h3>
+                        <p>К сожалению, даже такие ражостные дни подходят к концу</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dresscode-section">
+            <h2 class="section-title">Дресс-код</h2>
+            <div class="dresscode-content">
+                <img src="dress.jpg" alt="Дресс-код рекомендации" class="dresscode-image">
+                <p class="dresscode-note">Пожалуйста, ознакомьтесь с рекомендациями <br> по стилю</p>
+            </div>
+        </section>
+
+        <!-- Третье фото с местом проведения -->
+        <section class="location-section">
+            <div class="location-image">
+                <img src="3.jpg" alt="Место проведения">
+                <div class="location-text">
+                    <h2>Место проведения</h2>
+                    <div class="location-info">
+                        <p></i> Банкетный зал</p>
+                        <p><i class="fas fa-location-dot"></i>город Чебоксары, улица Коммунальная Слобода, 25В</p>
+                        <!-- <p><i class="fas fa-calendar"></i> 19 июля 2026</p>
+                        <p><i class="fas fa-clock"></i> Начало в 15:00</p> -->
+                    </div>
+                    <button id="map-btn" class="map-button">
+                        <i class="fas fa-map"></i> Посмотреть на карте
+                    </button>
+                </div>
+            </div>
+            <div id="map-container" class="map-container hidden">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-location-dot"></i>
+                    <p>Здесь будет интерактивная карта с местом проведения свадьбы</p>
+                    <p>Координаты: 59.9343° с.ш., 30.3061° в.д.</p>
+                    <button id="close-map" class="close-map-btn">Закрыть карту</button>
+                </div>
+            </div>
+        </section>
+
+                <!-- Пожелания к подаркам -->
+        <section class="gift-section">
+            <div class="gift-content">
+                <h2 class="section-title">Пожелания к подаркам</h2>
+                <div class="gift-text">
+                    <p>Ваше присутствие — лучший подарок для нас.</p>
+                    <p>Если вы захотите нас порадовать, мы будем благодарны за конверт с тёплыми пожеланиями.</p>
+                    <p class="gift-note">Без вишлиста, только ваши искренние слова</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма подтверждения присутствия -->
+        <section class="rsvp-section">
+            <h2 class="section-title">Подтвердите присутствие</h2>
+            <p class="section-subtitle">Пожалуйста, ответьте до 9 июня 2026 года</p>
+            
+            <form id="rsvp-form" class="rsvp-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Имя и фамилия *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div> -->
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Количество гостей *</label>
+                        <select id="guests" name="guests" required>
+                            <option value="" disabled selected>Выберите количество</option>
+                            <option value="1">1 (только я)</option>
+                            <option value="2">2 (я + партнер)</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="more">Более 4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">Присутствие *</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="" disabled selected>Выберите вариант</option>
+                            <option value="yes">С радостью приду</option>
+                            <option value="no">К сожалению, не смогу</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="wishes">Пожелания для молодожёнов</label>
+                    <textarea id="wishes" name="wishes" rows="2" placeholder="Ваши тёплые слова и пожелания..."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="dietary">Диетические предпочтения / Аллергии</label>
+                    <textarea id="dietary" name="dietary" rows="2" placeholder="Например: вегетарианство, аллергия на орехи, безглютеновое питание..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить ответ</button>
+                <div id="form-message" class="form-message"></div>
+            </form>
+        </section>
+
+        <!-- Футер с фото на всю высоту -->
+        <footer class="footer">
+            <div class="footer-image">
+                <img src="4.jpg" alt="Мы ждем вас">
+                <div class="footer-text">
+                    <p>Ждем вас с нетерпением!</p>
+                    <p class="footer-names">Алексей и Анна</p>
+                    <p>19 июля 2026 года</p>
+                </div>
+                <div class="footer-contacts">
+                    <p>По вопросам: +7 (999) 123-45-67 (Организатор)</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Предзагрузка оставшихся изображений -->
+    <link rel="preload" as="image" href="2.jpg">
+    <link rel="preload" as="image" href="3.jpg">
+    <link rel="preload" as="image" href="4.jpg">
+    
+    <script src="script.js"></script>
+    
+    <script>
+        // Инлайн скрипт для оптимизации загрузки шрифтов
+        document.fonts.ready.then(function() {
+            document.body.classList.add('fonts-loaded');
+        });
+        
+        // Fallback для старых браузеров
+        setTimeout(function() {
+            document.body.classList.add('fonts-loaded');
+        }, 1000);
+    </script>
+</body>
+</html>

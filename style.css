@@ -1,0 +1,902 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    flex: 1 0 auto;
+}
+
+/* Первое фото с именами и датой */
+.hero-section {
+    margin-bottom: 0;
+}
+
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-height: -webkit-fill-available;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+     object-position: 70% center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 900px;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+.names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    word-wrap: break-word;
+}
+
+.ampersand {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+}
+
+.date {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    display: inline-block;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    width: 90%;
+}
+
+/* Текст приглашения ПОД фото */
+.invitation-text-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: white;
+    margin-bottom: 0;
+}
+
+.invitation-text {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.invitation-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.invitation-text p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.invitation-text .signature {
+    font-style: italic;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    margin-top: 30px;
+    color: #777;
+}
+
+/* Второе фото с мини-историей */
+.story-section {
+    margin-bottom: 0;
+}
+
+.story-image {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-height: -webkit-fill-available;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.story-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 700px;
+    padding: 30px 20px;
+    text-align: center;
+    color: white;
+    width: 90%;
+}
+
+.story-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin-bottom: 25px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.story-text p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-bottom: 25px;
+    line-height: 1.8;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.quote {
+    font-style: italic;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    margin-top: 25px;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Секция с деталями */
+.details-section {
+    margin-bottom: 60px;
+    padding: 60px 20px;
+    background-color: white;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 50px;
+    color: #222;
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 1px;
+    background-color: #ddd;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item:before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: -40px;
+    width: 1px;
+    background-color: #e0e0e0;
+}
+
+.timeline-item:last-child:before {
+    display: none;
+}
+
+.timeline-time {
+    font-weight: 500;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h3 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.timeline-content p {
+    color: #666;
+    font-size: clamp(0.95rem, 3vw, 1rem);
+}
+
+/* Третье фото с местом проведения */
+.location-section {
+    margin-bottom: 0;
+}
+
+.location-image {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-height: -webkit-fill-available;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.location-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.location-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.location-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin-bottom: 30px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.location-info {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    margin-bottom: 40px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.location-info p {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.location-info i {
+    margin-right: 12px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    min-width: 24px;
+}
+
+.map-button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 14px 30px;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    -webkit-appearance: none;
+    border-radius: 0;
+    touch-action: manipulation;
+    min-height: 44px;
+}
+
+.map-button:hover {
+    background-color: white;
+    color: #333;
+}
+
+.map-container {
+    margin-top: 0;
+    padding: 20px;
+    background-color: white;
+}
+
+.map-placeholder {
+    height: 350px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    text-align: center;
+    padding: 25px;
+}
+
+.map-placeholder i {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.map-placeholder p {
+    margin-bottom: 10px;
+    max-width: 500px;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.close-map-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    -webkit-appearance: none;
+    border-radius: 0;
+    touch-action: manipulation;
+    min-height: 44px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Форма RSVP */
+.rsvp-section {
+    margin-bottom: 60px;
+    padding: 60px 20px;
+    background-color: white;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 40px;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+
+.rsvp-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 100%;
+}
+
+.form-group.full-width {
+    min-width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: clamp(0.95rem, 3vw, 1rem);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #ddd;
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(0.95rem, 3vw, 1rem);
+    background-color: white;
+    -webkit-appearance: none;
+    border-radius: 0;
+    touch-action: manipulation;
+    min-height: 44px;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #999;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 40px auto 0;
+    padding: 16px;
+    background-color: #222;
+    color: white;
+    border: none;
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    -webkit-appearance: none;
+    border-radius: 0;
+    touch-action: manipulation;
+    min-height: 44px;
+}
+
+.submit-btn:hover {
+    background-color: #444;
+}
+
+.form-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    display: none;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.form-message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    display: block;
+}
+
+.form-message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    display: block;
+}
+
+/* Футер с фото - на всю высоту до конца страницы */
+.footer {
+    flex-shrink: 0;
+    margin-top: auto;
+    width: 100%;
+    position: relative;
+}
+
+.footer-image {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    max-height: -webkit-fill-available;
+    min-height: 500px;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.footer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.footer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 700px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    padding: 0 20px;
+}
+
+.footer-text p {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    margin-bottom: 15px;
+}
+
+.footer-names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 7vw, 3rem) !important;
+    font-weight: 500;
+    margin: 25px 0 !important;
+}
+
+.footer-contacts {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 15px;
+    background-color: transparent;
+    color: white;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* iOS фикс для предотвращения увеличения при фокусе */
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus,
+    select:focus {
+        font-size: 16px !important;
+    }
+}
+
+/* Горизонтальная ориентация на мобильных */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero-image, .story-image, .location-image, .footer-image {
+        height: 120vh;
+    }
+    
+    .hero-text, .story-text, .location-text, .footer-text {
+        transform: translate(-50%, -40%);
+    }
+    
+    .names {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+    
+    .footer-text p {
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+    }
+}
+
+/* Мелкие девайсы */
+@media (max-width: 350px) {
+    .names {
+        font-size: 2rem;
+    }
+    
+    .ampersand {
+        font-size: 1.8rem;
+    }
+    
+    .date {
+        font-size: 1rem;
+    }
+    
+    .invitation-text-section {
+        padding: 40px 15px;
+    }
+    
+    .footer-text p {
+        font-size: 1.2rem;
+    }
+    
+    .footer-names {
+        font-size: 1.6rem !important;
+    }
+    
+    .map-button, .submit-btn, .close-map-btn {
+        padding: 12px 20px;
+    }
+}
+
+/* Высокие устройства (например, iPhone 12 Pro Max) */
+@media (min-height: 900px) {
+    .hero-text, .story-text, .location-text, .footer-text {
+        transform: translate(-50%, -45%);
+    }
+}
+
+/* Планшеты */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .form-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .form-group {
+        min-width: calc(50% - 15px);
+    }
+    
+    .form-group.full-width {
+        min-width: 100%;
+    }
+    
+    .timeline-item {
+        flex-direction: row;
+        padding-left: 0;
+    }
+    
+    .timeline-item:before {
+        left: 120px;
+    }
+    
+    .timeline-time {
+        width: 120px;
+        text-align: right;
+        padding-right: 20px;
+        margin-bottom: 0;
+    }
+    
+    .timeline-content {
+        padding-left: 40px;
+    }
+}
+
+/* Десктопы */
+@media (min-width: 1025px) {
+    .form-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .form-group {
+        min-width: calc(50% - 15px);
+    }
+    
+    .form-group.full-width {
+        min-width: 100%;
+    }
+    
+    .timeline-item {
+        flex-direction: row;
+        padding-left: 0;
+    }
+    
+    .timeline-item:before {
+        left: 120px;
+    }
+    
+    .timeline-time {
+        width: 120px;
+        text-align: right;
+        padding-right: 20px;
+        margin-bottom: 0;
+    }
+    
+    .timeline-content {
+        padding-left: 40px;
+    }
+}
+
+
+/* Секция "Запомните дату" */
+.save-date-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.calendar-container {
+    max-width: 350px;
+    margin: 40px auto 0;
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+    box-shadow: none;
+    border-radius: 10px;
+}
+
+.calendar-header {
+    background-color: #ffffff;
+    padding: 20px 15px 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.calendar-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.calendar-header p {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 8px 0 0;
+    letter-spacing: 1px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 15px 0 8px;
+    font-weight: 400;
+    color: #aaa;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 5px 10px 20px;
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 400;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.calendar-day.other-month {
+    color: #ddd;
+}
+
+.calendar-day.wedding-date {
+    background-color: #d4c5b0;
+    color: #ffffff;
+    font-weight: 400;
+    position: relative;
+}
+
+.calendar-day.wedding-date::after {
+    display: none;
+}
+
+.save-date-note {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+.save-date-note i {
+    margin: 0 8px;
+    color: #d4c5b0;
+    font-size: 0.7rem;
+}
+
+@media (max-width: 480px) {
+    .calendar-day {
+        font-size: 0.8rem;
+    }
+    
+    .calendar-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .calendar-days {
+        gap: 4px;
+        padding: 5px 8px 15px;
+    }
+}
+
+
+/* Секция "Пожелания к подаркам" */
+.gift-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.gift-text {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gift-text p {
+    font-size: clamp(1rem, 4vw, 1.1rem);
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.gift-note {
+    font-style: italic;
+    color: #b8a28c;
+    margin-top: 25px;
+    font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+}
+
+/* Секция "Дресс-код" */
+.dresscode-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.dresscode-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.dresscode-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    /* border: 1px solid #e8e8e8; */
+}
+
+.dresscode-note {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    color: #888;
+    margin-top: 15px;
+    line-height: 1.6;
+}
