@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             mapContainer.classList.remove('hidden');
             
-            // Плавная прокрутка с учетом мобильных устройств
             setTimeout(() => {
                 mapContainer.scrollIntoView({ 
                     behavior: 'smooth',
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             mapContainer.classList.add('hidden');
             
-            // Прокрутка обратно к кнопке
             setTimeout(() => {
                 if (mapButton) {
                     mapButton.scrollIntoView({ 
@@ -47,292 +45,267 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Обработка формы RSVP с оптимизацией для мобильных
-    const rsvpForm = document.getElementById('rsvp-form');
-    const formMessage = document.getElementById('form-message');
+    // Генерация календаря
+    generateCalendar();
     
-    if (rsvpForm) {
-        // Фокус на первое поле при открытии формы на мобильных
-        // const firstInput = rsvpForm.querySelector('input, select, textarea');
-        // if (firstInput && window.innerWidth < 768) {
-        //     setTimeout(() => {
-        //         firstInput.focus();
-        //     }, 500);
-        // }
-        
-        rsvpForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            if (isProcessing) return;
-            isProcessing = true;
-            
-            // Получение данных формы
-            const formData = new FormData(rsvpForm);
-            const formDataObj = Object.fromEntries(formData.entries());
-            
-            // Валидация формы
-            let isValid = true;
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const guestsSelect = document.getElementById('guests');
-            const attendanceSelect = document.getElementById('attendance');
-            
-            // Сброс предыдущих сообщений об ошибках
-            formMessage.className = 'form-message';
-            formMessage.style.display = 'none';
-            
-            // Проверка обязательных полей
-            if (!nameInput.value.trim()) {
-                formMessage.textContent = 'Пожалуйста, введите ваше имя';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                isValid = false;
-                nameInput.focus();
-            } else if (!emailInput.value.trim()) {
-                formMessage.textContent = 'Пожалуйста, введите ваш email';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                isValid = false;
-                emailInput.focus();
-            } else if (!guestsSelect.value) {
-                formMessage.textContent = 'Пожалуйста, выберите количество гостей';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                isValid = false;
-                guestsSelect.focus();
-            } else if (!attendanceSelect.value) {
-                formMessage.textContent = 'Пожалуйста, выберите вариант присутствия';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                isValid = false;
-                attendanceSelect.focus();
-            }
-            
-            if (!isValid) {
-                isProcessing = false;
-                return;
-            }
-            
-            // В реальном приложении здесь будет отправка данных на сервер
-            console.log('Данные формы:', formDataObj);
-            
-            // Показать сообщение об успешной отправке
-            if (attendanceSelect.value === 'yes') {
-                formMessage.textContent = 'Спасибо! Ваш ответ сохранён. Мы будем ждать вас на нашей свадьбе!';
-            } else {
-                formMessage.textContent = 'Спасибо за ответ! Очень жаль, что вы не сможете быть с нами в этот день.';
-            }
-            formMessage.className = 'form-message success';
-            formMessage.style.display = 'block';
-            
-            // Скрыть клавиатуру на мобильных
-            document.activeElement.blur();
-            
-            // Прокрутка к сообщению
-            setTimeout(() => {
-                formMessage.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 100);
-            
-            // Очистка формы
-            setTimeout(() => {
-                rsvpForm.reset();
-                isProcessing = false;
-            }, 2000);
-            
-            // Скрыть сообщение через 5 секунд
-            setTimeout(() => {
-                formMessage.className = 'form-message';
-                formMessage.style.display = 'none';
-            }, 5000);
-        });
-        
-        // Оптимизация для мобильных: улучшение UX при заполнении формы
-        const formInputs = rsvpForm.querySelectorAll('input, select, textarea');
-        formInputs.forEach(input => {
-            // Добавляем индикатор фокуса для мобильных
-            input.addEventListener('focus', function() {
-                this.style.backgroundColor = '#f9f9f9';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.style.backgroundColor = 'white';
-            });
-            
-            // Для селектов улучшаем UX на мобильных
-            if (input.tagName === 'SELECT') {
-                input.addEventListener('change', function() {
-                    // Вибрация на поддерживающих устройствах
-                    if (navigator.vibrate) {
-                        navigator.vibrate(10);
-                    }
-                });
-            }
-        });
-    }
+    // Инициализация формы с отправкой в Google Sheets
+    initRSVPForm();
     
-    // Оптимизация плавной прокрутки для мобильных
-    const smoothScroll = function(targetId) {
-        if (isProcessing) return;
-        isProcessing = true;
-        
-        const targetElement = document.querySelector(targetId);
-        if (!targetElement) {
-            isProcessing = false;
-            return;
-        }
-        
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        const duration = Math.min(800, Math.abs(distance) / 2);
-        let startTime = null;
-        
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
-            } else {
-                isProcessing = false;
-            }
-        }
-        
-        // Функция плавности
-        function ease(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
-        }
-        
-        requestAnimationFrame(animation);
-    };
-    
-    // Обработка кликов по навигационным ссылкам
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            smoothScroll(targetId);
-        });
-    });
-    
-    // Оптимизация для iOS: предотвращение bounce-эффекта
-    let lastTouchY = 0;
-    document.body.addEventListener('touchstart', function(e) {
-        lastTouchY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    document.body.addEventListener('touchmove', function(e) {
-        // Разрешаем скролл внутри полей ввода
-        if (e.target.tagName === 'INPUT' || 
-            e.target.tagName === 'TEXTAREA' || 
-            e.target.tagName === 'SELECT') {
-            return;
-        }
-        
-        const touchY = e.touches[0].clientY;
-        const touchDeltaY = touchY - lastTouchY;
-        
-        // Предотвращаем overscroll вверху и внизу страницы
-        if ((window.scrollY <= 0 && touchDeltaY > 0) || 
-            (window.scrollY + window.innerHeight >= document.body.scrollHeight - 10 && touchDeltaY < 0)) {
-            e.preventDefault();
-        }
-        
-        lastTouchY = touchY;
-    }, { passive: false });
-    
-    // Предотвращение масштабирования при двойном тапе на кнопках
-    let lastTapTime = 0;
-    document.addEventListener('touchend', function(e) {
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTapTime;
-        
-        if (tapLength < 300 && tapLength > 0) {
-            // Двойной тап - предотвращаем масштабирование
-            if (e.target.tagName === 'BUTTON' || 
-                e.target.tagName === 'INPUT' || 
-                e.target.tagName === 'TEXTAREA' || 
-                e.target.tagName === 'SELECT') {
-                e.preventDefault();
-            }
-        }
-        lastTapTime = currentTime;
-    });
-    
-    // Оптимизация загрузки изображений для мобильных
-    const lazyLoadImages = function() {
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            // Устанавливаем атрибут loading="lazy" для отложенной загрузки
-            if (!img.getAttribute('loading')) {
-                img.setAttribute('loading', 'lazy');
-            }
-            
-            // Добавляем fallback для ошибок загрузки
-            img.addEventListener('error', function() {
-                this.style.backgroundColor = '#f5f5f5';
-                this.style.minHeight = '200px';
-                console.warn('Не удалось загрузить изображение:', this.src);
-            });
-        });
-    };
-    
-    // Запускаем ленивую загрузку после полной загрузки страницы
-    window.addEventListener('load', function() {
-        lazyLoadImages();
-        
-        // Добавляем класс loaded для плавного появления контента
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-        }, 100);
-    });
-    
-    // Оптимизация для медленных сетей
-    if ('connection' in navigator) {
-        const connection = navigator.connection;
-        if (connection) {
-            // Если медленное соединение, отключаем некоторые эффекты
-            if (connection.effectiveType === 'slow-2g' || 
-                connection.effectiveType === '2g' ||
-                connection.saveData === true) {
-                console.log('Медленное соединение, оптимизируем загрузку...');
-                
-                // Отключаем плавные анимации
-                document.documentElement.style.setProperty('--animation-duration', '0s');
-                
-                // Предотвращаем загрузку ненужных ресурсов
-                const allImages = document.querySelectorAll('img');
-                allImages.forEach((img, index) => {
-                    if (index > 2) { // Оставляем только первые 3 изображения
-                        img.setAttribute('loading', 'lazy');
-                        img.setAttribute('decoding', 'async');
-                    }
-                });
-            }
-        }
-    }
-    
-    // Фикс для iOS Safari 100vh
-    const setVH = function() {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    
+    // Оптимизация для iOS
     setVH();
     window.addEventListener('resize', setVH);
     window.addEventListener('orientationchange', setVH);
+    
+    // Оптимизация загрузки изображений
+    lazyLoadImages();
 });
 
+// ========== МОДАЛЬНОЕ ОКНО ==========
+function showModal(title, message, isError = false) {
+    const existingModal = document.getElementById('customModal');
+    if (existingModal) existingModal.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'customModal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        animation: fadeIn 0.3s ease;
+    `;
+
+    const icon = isError ? '❌' : '✅';
+    const btnColor = isError ? '#dc3545' : '#28a745';
+
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            border-radius: 20px;
+            padding: 30px 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s ease;
+            border-top: 4px solid ${btnColor};
+        ">
+            <div style="font-size: 4rem; margin-bottom: 15px;">${icon}</div>
+            <h3 style="
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                color: #333;
+                margin-bottom: 15px;
+            ">${title}</h3>
+            <p style="
+                font-family: 'Raleway', sans-serif;
+                font-size: 1rem;
+                color: #666;
+                margin-bottom: 25px;
+                line-height: 1.5;
+            ">${message}</p>
+            <button onclick="this.closest('#customModal').remove()" style="
+                background: ${btnColor};
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 30px;
+                font-family: 'Raleway', sans-serif;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s;
+            " onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                Закрыть
+            </button>
+        </div>
+    `;
+
+    // Добавляем анимации если нет
+    if (!document.querySelector('#modal-styles')) {
+        const style = document.createElement('style');
+        style.id = 'modal-styles';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.remove();
+    });
+
+    if (!isError) {
+        setTimeout(() => {
+            if (modal.parentElement) modal.remove();
+        }, 5000);
+    }
+}
+
+// ========== GOOGLE SHEETS ==========
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBkdXcxX5bz1e3NPxEq59QLp_cc4h-W-EKXzq-WU6vYEEbV2zfh61FB-FRpUOqA-F1/exec'; // ЗАМЕНИТЕ НА ВАШ URL
+
+// Инициализация формы RSVP
+function initRSVPForm() {
+    const rsvpForm = document.getElementById('rsvp-form');
+    const formMessage = document.getElementById('form-message');
+    
+    if (!rsvpForm) return;
+    
+    rsvpForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        // Получение данных формы
+        const nameInput = document.getElementById('name');
+        const guestsSelect = document.getElementById('guests');
+        const attendanceSelect = document.getElementById('attendance');
+        const wishesTextarea = document.getElementById('wishes');
+        const dietaryTextarea = document.getElementById('dietary');
+        
+        // Валидация
+        if (!nameInput.value.trim()) {
+            showModal('Ошибка', 'Пожалуйста, введите ваше имя', true);
+            nameInput.focus();
+            return;
+        }
+        
+        if (!guestsSelect.value) {
+            showModal('Ошибка', 'Пожалуйста, выберите количество гостей', true);
+            guestsSelect.focus();
+            return;
+        }
+        
+        if (!attendanceSelect.value) {
+            showModal('Ошибка', 'Пожалуйста, выберите вариант присутствия', true);
+            attendanceSelect.focus();
+            return;
+        }
+        
+        const submitBtn = rsvpForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        // Показываем загрузку
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+        
+        // Создаем модальное окно загрузки
+        const loadingModal = document.createElement('div');
+        loadingModal.id = 'loadingModal';
+        loadingModal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        `;
+        loadingModal.innerHTML = `
+            <div style="
+                background: white;
+                border-radius: 20px;
+                padding: 30px 40px;
+                text-align: center;
+            ">
+                <div style="
+                    width: 50px;
+                    height: 50px;
+                    border: 3px solid #e0e0e0;
+                    border-top-color: #222;
+                    border-radius: 50%;
+                    margin: 0 auto 20px;
+                    animation: spin 1s linear infinite;
+                "></div>
+                <p style="
+                    font-family: 'Raleway', sans-serif;
+                    font-size: 1rem;
+                    color: #666;
+                ">Отправка ответа...</p>
+            </div>
+        `;
+        document.body.appendChild(loadingModal);
+        
+        try {
+            // Формируем данные для отправки
+            const formDataToSend = new URLSearchParams();
+            formDataToSend.append('name', nameInput.value.trim());
+            formDataToSend.append('guests', guestsSelect.value);
+            formDataToSend.append('attendance', attendanceSelect.value);
+            formDataToSend.append('wishes', wishesTextarea ? wishesTextarea.value.trim() : '');
+            formDataToSend.append('dietary', dietaryTextarea ? dietaryTextarea.value.trim() : '');
+            
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formDataToSend.toString()
+            });
+            
+            const result = await response.json();
+            
+            loadingModal.remove();
+            
+            if (result.result === 'success') {
+                const attendanceText = attendanceSelect.value === 'yes' 
+                    ? 'Ждём вас на нашей свадьбе!' 
+                    : 'Очень жаль, что вы не сможете быть с нами.';
+                
+                showModal(
+                    'Спасибо, ' + nameInput.value.trim() + '!',
+                    'Ваш ответ успешно отправлен.<br>' + attendanceText + ' 🎉',
+                    false
+                );
+                
+                // Очищаем форму
+                rsvpForm.reset();
+                
+                // Скрыть сообщение если было
+                if (formMessage) {
+                    formMessage.style.display = 'none';
+                }
+            } else {
+                throw new Error(result.message || 'Ошибка отправки');
+            }
+        } catch (error) {
+            loadingModal.remove();
+            showModal(
+                'Ошибка',
+                error.message || 'Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.',
+                true
+            );
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    });
+}
 
 // Генерация календаря на июль 2026
 function generateCalendar() {
@@ -386,5 +359,22 @@ function generateCalendar() {
     }
 }
 
-// Запускаем генерацию календаря
-generateCalendar();
+// Оптимизация загрузки изображений
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        if (!img.getAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+        
+        img.addEventListener('error', function() {
+            console.warn('Не удалось загрузить изображение:', this.src);
+        });
+    });
+}
+
+// Фикс для iOS Safari 100vh
+function setVH() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
