@@ -208,14 +208,19 @@
                     </button>
                 </div>
             </div>
-            <div id="map-container" class="map-container hidden">
-                <div class="map-placeholder">
-                    <i class="fas fa-map-location-dot"></i>
-                    <p>Здесь будет интерактивная карта с местом проведения свадьбы</p>
-                    <p>Координаты: 59.9343° с.ш., 30.3061° в.д.</p>
-                    <button id="close-map" class="close-map-btn">Закрыть карту</button>
+                <div id="map-container" class="map-container hidden">
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad98859ae9a6d45837b3233964d14b891a89323f4fd626f450bf4abc5b2184691&amp;source=constructor" 
+                            width="100%" 
+                            height="400" 
+                            frameborder="0"
+                            allowfullscreen="true"
+                            loading="lazy">
+                        </iframe>
+                        <button id="close-map" class="close-map-btn">Закрыть карту</button>
+                    </div>
                 </div>
-            </div>
         </section>
 
                 <!-- Пожелания к подаркам -->
@@ -291,11 +296,11 @@
                 <div class="footer-text">
                     <p>Ждем вас с нетерпением!</p>
                     <p class="footer-names">Роман и Дарья</p>
-                    <p>19 июля 2026 года</p>
+                    <p>9 июля 2026 года</p>
                 </div>
-                <div class="footer-contacts">
+                <!-- <div class="footer-contacts">
                     <p>По вопросам: +7 (999) 123-45-67 (Организатор)</p>
-                </div>
+                </div> -->
             </div>
         </footer>
     </div>
